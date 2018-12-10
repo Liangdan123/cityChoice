@@ -9,6 +9,9 @@ export default {
 <style lang="stylus" scoped>
 .header
   width: 100%
+  position fixed
+  top 0
+  z-index 100
   line-height 40px
   text-align center
   background #ED4E5E

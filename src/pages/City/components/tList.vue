@@ -2,13 +2,15 @@
   <div class="list" ref="wrapper">
     <div>
       <!-- 当前城市 -->
-      <div class="area">
-        <div class="title border-topbottom">当前</div>
-        <div class="button-list">
-          <div class="button-wrapper">
-            <div class="button">北京</div>
-          </div>
-        </div>
+      <div v-if="loveCites">
+	      <div class="area">
+	        <div class="title border-topbottom">热爱</div>
+	        <div class="button-list">	        	
+	          <div class="button-wrapper" v-for="item in loveCites" :key="item.id"> 
+	            <div class="button">{{item.name}}</div>
+	          </div>          
+	        </div>
+	      </div>
       </div>
       <!-- 热门城市 -->
       <div class="area">
@@ -24,7 +26,7 @@
         <div class="title border-topbottom">{{key}}</div>
         <div class="button-list">
           <div class="button-wrapper" v-for="innerItem in item" :key="innerItem.id">
-            <div class="button">{{innerItem.name}}</div>
+            <div class="button" @click="city(innerItem)">{{innerItem.name}}</div>
           </div>
         </div>
       </div>
@@ -49,13 +51,14 @@ export default {
   data() {
     return {
       letter: '',
-      showToast: false
+      showToast: false,
+      loveCites:[]
     }
   },
   watch: {
     letter() {
       if(this.letter) {
-        const elment = this.$refs[this.letter][0]
+        const elment = this.$refs[this.letter][0];
         this.scroll.scrollToElement(elment)
         this.changeToast()
       }
@@ -70,6 +73,12 @@ export default {
       this.timer = setTimeout(()=>{
         this.showToast = false
       },500)
+    },
+    city(el){
+    	if(this.loveCites.includes(el)){
+    		return
+    	}
+    	this.loveCites.push(el)
     }
   },
   mounted() {
@@ -85,7 +94,6 @@ export default {
 <style lang="stylus" scoped>
 .list
   position absolute
-  overflow hidden
   top 40px
   left 0
   right 0

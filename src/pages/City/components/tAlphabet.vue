@@ -50,14 +50,15 @@ export default {
         if(this.timer) {
           clearTimeout(this.timer)
         }
-        this.timer = setTimeout(() => {
-          const startY = this.$refs['A'][0].offsetTop
-          const touchY = e.touches[0].clientY - 40
-          const index = Math.floor((touchY - this.startY)/20)
-          if(index >= 0 && index < this.letters.length) {
-            eventBus.$emit('change', this.letters[index])
-          }
-        }, 16);
+//      this.timer = setTimeout(() => {
+//        const startY = this.$refs['A'][0].offsetTop
+//        const touchY = e.touches[0].clientY - 40
+//        const index = Math.floor((touchY - this.startY)/20)
+//        console.log("index:",index)
+//        if(index >= 0 && index < this.letters.length) {
+//          eventBus.$emit('change', this.letters[index])
+//        }
+//      }, 16);
       }
     },
     handleTouchEnd() {
@@ -71,7 +72,7 @@ export default {
   display flex
   justify-content center
   align-items center
-  position absolute
+  position fixed
   top 40px
   width 20px
   right 0
